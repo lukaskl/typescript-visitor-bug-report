@@ -9,20 +9,42 @@ yarn test
 ```
 
 ---
-**TypeScript Version:** 3.9.2
+**TypeScript Version:** 
+- 🔴`3.9.2`
+- 🔴`3.9.1-rc`
+- 🔴`3.9.0-beta`
+- ✅3.8.3 (it work with previous versions)
 
-**Search Terms:** typeerror kind undefined visitor
+
+<!-- Search terms you tried before logging this (so others can find this issue more easily) -->
+**Search Terms:**
+Visitor TypeError kind undefined 85032
 
 **Code**
 
-Unknown
+_Unknown_ (Error is thrown at `node_modules/typescript/lib/typescript.js:85032:35`)
+
+But this part triggers it
+```ts
+export interface ColorProps {
+  style?: CSSProperties
+}
+
+const Color = styled(({ style }: ColorProps) => (
+  <div
+    style={{
+      ...style,
+      background: `anything`,
+    }}
+  />
+))``
+```
 
 **Expected behavior:**
 
 It compiles
 
 **Actual behavior:**
-
 ```
     TypeError: Cannot read property 'kind' of undefined
 
@@ -38,11 +60,11 @@ It compiles
       at visitObjectLiteralExpression (node_modules/typescript/lib/typescript.js:85057:23)
 ```
 
-**Playground Link:**
+**Playground Link:** <!-- A link to a TypeScript Playground "Share" link which demonstrates this behavior -->
 
-- https://github.com/lukaskl/typescript-visitor-bug-report
+- minimal reproducible repository - https://github.com/lukaskl/typescript-visitor-bug-report
 
-**Related Issues:**
-
-- https://github.com/microsoft/TypeScript/issues/38383 (could be, same Error message, but thrown at a different place)
+**Related Issues:** <!-- Did you find other bugs that looked similar? -->
+- https://github.com/microsoft/TypeScript/issues/38558 
+- https://github.com/microsoft/TypeScript/issues/38383 (could be duplicate, same Error message, but thrown at a different place)
 
